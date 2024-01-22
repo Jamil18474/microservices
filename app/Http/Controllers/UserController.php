@@ -38,14 +38,14 @@ class UserController extends Controller
      * @return JsonResponse
      */
     public function setUser(Request $request){
-        $user = new User();
-        $user->nom = $request->nom;
-        $user->prenom = $request->prenom;
-        $user->idTypeUser = $request->idTypeUser;
-        $user->password = $request->password;
-        $user->email = $request->email;
-        $user->age = $request->age;
-        $user->save();
+        $validatedData = $request->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'idTypeUser' =>'required|integer' ,
+            'password' => 'required|string',
+            'email' => 'required|string',
+            'age' => 'required|integer']);
+        $user = User::create($validatedData);
         return response()->json($user);
     }
     /**
@@ -63,13 +63,17 @@ class UserController extends Controller
     }
     public function updateUser($id, Request $request){
         $user = User::find($id);
-        $user->nom = $request->nom;
-        $user->prenom = $request->prenom;
-        $user->idTypeUser = $request->idTypeUser;
-        $user->password = $request->password;
-        $user->email = $request->email;
-        $user->age = $request->age;
-        $user->save();
+        if(!$user) {
+            return response()->json(["message" => "User not found"], 400);
+        }
+        $validatedData = $request->validate([
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+        'idTypeUser' =>'required|integer' ,
+        'password' => 'required|string',
+        'email' => 'required|string',
+        'age' => 'required|integer']);
+        $user->update($validatedData);
         return response()->json($user);
     }
 }
