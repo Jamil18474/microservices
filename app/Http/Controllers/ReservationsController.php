@@ -21,23 +21,23 @@ class ReservationsController extends Controller
         $reservations = Reservations::find($id);
         return response()->json($reservations);
     }
-    public function setReservation($idUser, $idTarif ,$idSeance)
+    public function setReservation($idUser, Request $request)
     {
         $reservation = new Reservations();
         $reservation->idUser= $idUser;
-        $reservation->idTarif= $idTarif;
-        $reservation->idSeance= $idSeance;
+        $reservation->idTarif= $request->idTarif;
+        $reservation->idSeance= $request->idSeance;
         $reservation->save();
         return response()->json($reservation);
     }
 
-    public function updateReservation($id, $idUser, $idTarif ,$idSeance)
+    public function updateReservation($id, $idUser, Request $request)
     {
         $reservation= Reservations::find($id);
 
         $reservation->idUser = $idUser;
-        $reservation->idTarif = $idTarif;
-        $reservation->idSeance = $idSeance;
+        $reservation->idTarif = $request->idTarif;
+        $reservation->idSeance = $request->idSeance;
         $reservation->save();
         return response()->json($reservation);
     }

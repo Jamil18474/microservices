@@ -14,18 +14,18 @@ class UserController extends Controller
      *
      *
      */
-    public function getUsers(): JsonResponse
+    public function getUsers()
     {
         $users = User::all();
         return response()->json($users);
 
     }
-    public function getUser($email, $password): JsonResponse
+    public function getUser(Request $request)
     {
-        $user = User::where('email', $email)->where('password', $password)->first();
+        $user = User::where('email', $request->email)->where('password', $request->password)->first();
         return response()->json($user);
     }
-    public function getUserId($id): JsonResponse
+    public function getUserId($id)
     {
         $user = User::find($id);
         return response()->json($user);
@@ -37,7 +37,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function setUser(Request $request) : JsonResponse {
+    public function setUser(Request $request){
         $user = new User();
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
@@ -54,14 +54,14 @@ class UserController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function deleteUser($id): JsonResponse
+    public function deleteUser($id)
     {
         $user = User::find($id);
         $user->delete();
         return response()->json($user);
 
     }
-    public function updateUser($id, Request $request) : JsonResponse {
+    public function updateUser($id, Request $request){
         $user = User::find($id);
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;

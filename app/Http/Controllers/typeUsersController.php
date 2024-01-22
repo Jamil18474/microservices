@@ -15,32 +15,32 @@ public function __construct()
 
 public function getTypes()
 {
-    $typeUsers = type_users::all();
+    $typeUsers = typeUsers::all();
     return response()->json($typeUsers);
 }
 
-public function setType($nom)
+public function setType(Request $request)
 {
-    $typeUser = new type_users();
-    $typeUser->nom= $nom;
+    $typeUser = new typeUsers();
+    $typeUser->nom=$request->nom;
     $typeUser->save();
     return response()->json($typeUser);
 }
 
-public function update($id, $nom){
+public function update($id, Request $request){
     $typeUser = typeUsers::find($id);
-    $typeUser->nom = $nom;
+    $typeUser->nom = $request->nom;
     $typeUser->save();
     return response()->json($typeUser);
 }
 
 public function getType($id){
-    $typeUser = type_users::find($id);
+    $typeUser = typeUsers::find($id);
     return response()->json($typeUser);
 }
 
 public function deleteType($id){
-    $typeUser = type_users::find($id);
+    $typeUser = typeUsers::find($id);
     $typeUser->delete();
     return response()->json('Le type d\'utilisateur a été supprimé');
 }
