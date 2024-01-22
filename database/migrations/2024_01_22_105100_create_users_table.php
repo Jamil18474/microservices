@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->id('idUser');
-            $table->foreign('idUser')
+            $table->unsignedBigInteger('idTypeUser');
+            $table->foreign('idTypeUser')
                 ->references('id')
                 ->on('type_users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
