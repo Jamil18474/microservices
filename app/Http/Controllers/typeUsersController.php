@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\typeUsers;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class typeUsersController extends Controller
@@ -21,16 +22,22 @@ public function getTypes()
 
 public function setType(Request $request)
 {
-    $typeUser = new typeUsers();
-    $typeUser->nom=$request->nom;
-    $typeUser->save();
+    $validatedData = $request->validate([
+        'nom' => 'required|string',
+    ]);
+    $typeUser = typeUsers::create($validatedData);
     return response()->json($typeUser);
 }
 
-public function update($id, Request $request){
+public function update(Request $request, $id){
     $typeUser = typeUsers::find($id);
-    $typeUser->nom = $request->nom;
-    $typeUser->save();
+    if(!$typeUser){
+        return response()->json(["message" => "TypeUser not found"], 404);
+    }
+    $validatedData = $request->validate([
+        'nom' => 'required|string',
+    ]);
+    $typeUser->update($validatedData);
     return response()->json($typeUser);
 }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservations;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ReservationsController extends Controller
@@ -35,6 +36,9 @@ class ReservationsController extends Controller
     {
         $reservation= Reservations::find($id);
 
+        if(!$reservation){
+            return response()->json(["message", "Reservation not found !"], 404);
+        }
         $reservation->idUser = $idUser;
         $reservation->idTarif = $request->idTarif;
         $reservation->idSeance = $request->idSeance;
