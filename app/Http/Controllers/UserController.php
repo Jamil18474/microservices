@@ -69,7 +69,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
         'nom' => 'required|string',
         'prenom' => 'required|string',
-        'idTypeUser' =>'required|integer' ,
+        'idTypeUser' =>'required',
         'password' => 'required|string',
         'email' => 'required|string',
         'age' => 'required|integer']);
