@@ -30,14 +30,14 @@ Route::delete('/types/{id}', [typeUsersController::class, 'deleteType']);
 Route::get('/reservation', [ReservationsController::class, 'index']);
 Route::get('/reservation/{id}', [ReservationsController::class, 'getReservation']);
 Route::post('/reservation', [ReservationsController::class, 'setReservation']);
-Route::put('/reservation', [ReservationsController::class, 'updateReservation']);
-Route::delete('/reservation', [ReservationsController::class, 'deleteReservation']);
+Route::put('/reservation/{id}', [ReservationsController::class, 'updateReservation']);
+Route::delete('/reservation/{id}', [ReservationsController::class, 'deleteReservation']);
 
 Route::get('/utilisateurs', [UserController::class, 'getUsers']);
 Route::get('/utilisateurs/{id}', [UserController::class, 'getUserId']);
 Route::post('/utilisateurs', [UserController::class, 'setUser']);
-Route::put('/utilisateurs', [UserController::class, 'updateUser']);
-Route::delete('/utilisateurs', [UserController::class, 'deleteUser']);
+Route::put('/utilisateurs/{id}', [UserController::class, 'updateUser']);
+Route::delete('/utilisateurs/{id}', [UserController::class, 'deleteUser']);
 
 
 
