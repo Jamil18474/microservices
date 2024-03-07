@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use Faker\Calculator\Iban;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Reservations;
 use Illuminate\Database\Seeder;
 
 class ReservationSeeder extends Seeder
@@ -13,10 +12,6 @@ class ReservationSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("reservations")->insert([
-            "idUser" => Int::random,
-            "idTarif" => Int::random,
-            "idSeance" => Int::random
-        ]);
+        Reservations::factory(10)->create();
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\typeUsers;
 use Illuminate\Database\Seeder;
-use Psy\Util\Str;
 
 class UserTypeSeeder extends Seeder
 {
@@ -13,8 +12,6 @@ class UserTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("type_users")->insert([
-           "nom" => Str::random(7)
-        ]);
+        typeUsers::factory(10)->create();
     }
 }
