@@ -35,10 +35,7 @@ class reservationsTest extends TestCase
     }
 
     public function test_creation_reservation(): void{
-        $idUser = 1;
-        $idTarif = 1;
-        $idSeance = 1;
-        $response = $this->post('api/reservation(,1,1)');
+        $response = $this->post('api/reservation',['idUser' => 2],['idTarif' => 2, 'idSeance' => 2]);
         $response->assertStatus(200);
     }
 }
